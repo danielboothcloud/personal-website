@@ -14,7 +14,7 @@ const projects = [
 	{
 		title: 'Learning Roadmap',
 		technologies: ['Svelte', 'Cloudflare'],
-		description: 'Personal learning roadmap for tracking progress',
+		description: 'Personal learning roadmap for tracking progress of my professional development',
 		url: 'https://github.com/danielbooth-cloud/roadmap'
 	},
 	{
