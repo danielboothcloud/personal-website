@@ -84,7 +84,7 @@
 		display: flex;
 		flex-direction: column;
 		color: white;
-		background: #111;
+		background: var(--color-surface-900);
 		padding: 2rem;
 		width: 100%;
 		border-radius: 5px;

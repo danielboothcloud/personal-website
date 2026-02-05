@@ -40,9 +40,9 @@
 		-webkit-border-radius: 3px;
 		-moz-border-radius: 3px;
 		border-radius: 3px;
-		background-color: #000;
+		background-color: var(--color-surface-600);
 		background-color: hsla(0, 0%, 20%, 0.9);
-		color: #fff;
+		color: var(--color-palette-light);
 		content: attr(data-tooltip);
 		text-align: center;
 		font-size: 14px;
@@ -55,7 +55,7 @@
 		bottom: 100%;
 		left: 50%;
 		width: 0;
-		border-top: 5px solid #000;
+		border-top: 5px solid var(--color-surface-600);
 		border-top: 5px solid hsla(0, 0%, 20%, 0.9);
 		border-right: 5px solid transparent;
 		border-left: 5px solid transparent;

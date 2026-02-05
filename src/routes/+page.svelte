@@ -96,7 +96,7 @@
 		width: 40px;
 	}
 	.icon:hover {
-		color: #ca3c25;
+		color: var(--color-palette-pink);
 	}
 
 	@media (min-width: 900px) {

@@ -51,7 +51,7 @@
 
 	.button:hover::after {
 		content: '';
-		background: #ca3c25;
+		background: var(--color-palette-pink);
 		display: block;
 		height: 3px;
 		width: 100%;
@@ -61,7 +61,7 @@
 
 	.button.selected:after {
 		content: '';
-		background: #ca3c25;
+		background: var(--color-palette-pink);
 		display: block;
 		height: 3px;
 		width: 100%;
