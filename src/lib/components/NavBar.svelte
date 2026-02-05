@@ -1,6 +1,5 @@
 <script lang="ts">
 	import Burger from './Hamburger.svelte';
-	import Logo from '$lib/assets/logo.svg';
 	import routes from '$lib/NavRoutes';
 	let opened = false;
 	export let segment: string;
@@ -9,7 +8,7 @@
 <div class={opened ? 'NavBar open' : 'NavBar'}>
 	<div class="innerContainer">
 		<a href="/">
-			<img src={Logo} alt="logo" class="logo" />
+			<img src="/logo.png" alt="logo" class="logo" />
 		</a>
 		<div class="burger">
 			<Burger bind:open={opened} />
@@ -34,8 +33,8 @@
 <style>
 	:global(.logo) {
 		cursor: pointer;
-		height: 30px;
-		width: 30px;
+		height: 40px;
+		width: 40px;
 	}
 
 	.open {

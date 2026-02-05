@@ -64,7 +64,7 @@
 		display: grid;
 		grid-template-columns: 1fr;
 		grid-gap: 40px;
-		margin-top: 30px;
+		margin-top: 0;
 	}
 
 	h2 {
@@ -99,7 +99,7 @@
 
 	.articles {
 		width: 100%;
-		margin: 50px auto;
+		margin: 20px auto;
 		display: grid;
 		grid-gap: 1rem;
 		grid-template-columns: 1fr;
@@ -120,7 +120,7 @@
 		}
 		.articles > h1 {
 			font-size: 48px;
-			margin: 0 0 50px 0;
+			margin: 0 0 20px 0;
 		}
 
 		.articles {
