@@ -50,7 +50,7 @@
 	</div>
 
 	<section class="cv-section">
-		<h2>CV</h2>
+		<h2>Resume</h2>
 		<div class="cv-embed">
 			<iframe
 				src="https://resume.danielbooth.cloud/daniel-booth_20260224_2211.pdf"
@@ -63,7 +63,7 @@
 			target="_blank"
 			rel="noopener noreferrer"
 		>
-			Download CV
+			Download Resume
 		</a>
 	</section>
 </main>
