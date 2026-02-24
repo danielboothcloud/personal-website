@@ -126,9 +126,25 @@
 		display: flex;
 		justify-content: center;
 		align-items: center;
-		color: white;
-		border: 2px solid white;
+		color: var(--color-palette-emerald);
+		border: 2px solid var(--color-palette-emerald);
 		padding: 10px;
+		transition: background-color 0.2s ease-in-out, color 0.2s ease-in-out;
+	}
+
+	.button:hover {
+		background-color: var(--color-palette-emerald);
+		color: var(--color-palette-dark);
+	}
+
+	@media (min-width: 600px) {
+		.projectContainer .projects {
+			grid-template-columns: repeat(2, 1fr);
+		}
+
+		h1, .note {
+			grid-column: 1 / -1;
+		}
 	}
 
 	@media (min-width: 900px) {
@@ -140,21 +156,11 @@
 			margin: 50px 0 0 0;
 		}
 
-		.projects {
-			grid-template-columns: 1fr;
-		}
-
 		.projects .project {
 			min-height: 200px;
 		}
 		.button {
 			max-width: 200px;
-		}
-	}
-
-	@media (min-width: 600px) {
-		.projects {
-			grid-template-columns: 1fr;
 		}
 	}
 </style>
