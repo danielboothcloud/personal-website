@@ -12,7 +12,7 @@
 		<p class="note">
 			These are some projects I have worked on in my free time; they range from websites to personal tooling I’ve created to empower my workflow.
 		</p>
-		{#each projects as project}
+		{#each projects as project (project.title)}
 			<div class="project">
 				<div class="header">
 					<h2>
@@ -21,8 +21,8 @@
 					<div class="techsContainer">
 						Technologies:
 						<div class="techs">
-							{#each project.technologies as tech, index}
-								{#if index > 0}, {/if}{tech}
+							{#each project.technologies as tech (tech)}
+								<span>{tech}</span>
 							{/each}
 						</div>
 					</div>
@@ -48,7 +48,6 @@
 		text-align: center;
 		padding: 1em;
 		margin: 0 auto;
-		text-align: center;
 	}
 
 	.note {
@@ -88,9 +87,8 @@
 		background: var(--color-surface-900);
 		padding: 2rem;
 		width: 100%;
-		border-radius: 5px;
-		transition: transform 0.2s ease-in-out;
 		border-radius: 25px;
+		transition: transform 0.2s ease-in-out;
 	}
 
 	.project p {
@@ -118,8 +116,8 @@
 		justify-content: space-between;
 		align-items: center;
 	}
-	.techs > div {
-		margin: 0 0 0 10px;
+	.techs span:not(:last-child)::after {
+		content: ', ';
 	}
 
 	.button {
