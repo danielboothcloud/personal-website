@@ -6,6 +6,13 @@ const projects = [
 		url: 'https://github.com/danielboothcloud/JTimer'
 	},
 	{
+		title: 'Clones',
+		technologies: ['Go', 'Git', 'Jira'],
+		description:
+			'Interactive CLI for cloning and managing Git repos from GitHub and GitLab with Jira integration',
+		url: 'https://github.com/danielboothcloud/clones'
+	},
+	{
 		title: 'Personal Website',
 		technologies: ['SvelteKit', 'TypeScript', 'Tailwind CSS', 'Cloudflare'],
 		description: 'Portfolio website showcasing my work and skills',
