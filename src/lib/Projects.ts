@@ -14,7 +14,7 @@ const projects = [
 	},
 	{
 		title: 'Personal Website',
-		technologies: ['SvelteKit', 'TypeScript', 'Tailwind CSS', 'Cloudflare'],
+		technologies: ['SvelteKit', 'TypeScript', 'Tailwind', 'Cloudflare'],
 		description: 'Portfolio website showcasing my work and skills',
 		url: 'https://github.com/danielboothcloud/personal-website'
 	},
