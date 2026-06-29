@@ -14,8 +14,8 @@
 	<div class="article">
 		{#if article}
 			<h1 class="title">
-				<a href={article.url} target="_blank" rel="noreferrer">{article.title} </a>
-				<a class="icon" href={article.url} target="_blank"><FaExternalLinkAlt /></a>
+				<a href={article.notionUrl} target="_blank" rel="noreferrer">{article.title} </a>
+				<a class="icon" href={article.notionUrl} target="_blank"><FaExternalLinkAlt /></a>
 			</h1>
 			{@html article.body_html}
 		{/if}
