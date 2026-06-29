@@ -53,13 +53,13 @@
 		<h2>Resume</h2>
 		<div class="cv-embed">
 			<iframe
-				src="https://resume.danielbooth.cloud/daniel-booth_20260224_2211.pdf"
+				src="https://resume.danielbooth.cloud/daniel-booth-cv.pdf"
 				title="Daniel Booth CV"
 			></iframe>
 		</div>
 		<a
 			class="cv-download"
-			href="https://resume.danielbooth.cloud/daniel-booth_20260224_2211.pdf"
+			href="https://resume.danielbooth.cloud/daniel-booth-cv.pdf"
 			target="_blank"
 			rel="noopener noreferrer"
 		>
