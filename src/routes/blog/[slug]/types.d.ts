@@ -4,7 +4,6 @@ export interface Article {
 	description: string;
 	tags: string[];
 	body_html: string;
-	notionUrl: string;
 }
 
 export interface PageData {

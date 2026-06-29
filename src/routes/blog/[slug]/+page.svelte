@@ -1,5 +1,4 @@
 <script lang="ts">
-	import FaExternalLinkAlt from 'svelte-icons/fa/FaExternalLinkAlt.svelte';
 	import type { Article, PageData } from './types.js';
 
 	export let data: PageData;
@@ -13,10 +12,7 @@
 <div class="articleContainer">
 	<div class="article">
 		{#if article}
-			<h1 class="title">
-				<a href={article.notionUrl} target="_blank" rel="noreferrer">{article.title} </a>
-				<a class="icon" href={article.notionUrl} target="_blank"><FaExternalLinkAlt /></a>
-			</h1>
+			<h1 class="title">{article.title}</h1>
 			{@html article.body_html}
 		{/if}
 	</div>
@@ -31,7 +27,7 @@
 		box-sizing: border-box;
 		text-align: center;
 		padding: 0;
-		margin: 50px 10px 0;
+		margin: 50px 10px auto;
 		text-align: center;
 		/* font-size: 20px; */
 	}
@@ -59,15 +55,6 @@
 		padding: 30px;
 		width: 100%;
 		border-radius: 5px;
-	}
-	.icon {
-		width: 20px;
-		height: 20px;
-		margin-left: 10px;
-	}
-
-	.article > h1 > a {
-		color: white;
 	}
 	.article:hover {
 		cursor: pointer;

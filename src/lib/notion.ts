@@ -24,8 +24,10 @@ async function getDataSourceId(): Promise<string> {
 // keeps the mapping readable without the type ceremony.
 function toMeta(page: any) {
 	const p = page.properties;
+	// The title property's name varies (Notion defaults to "Name"); find it by type.
+	const titleProp: any = Object.values(p).find((x: any) => x.type === 'title');
 	return {
-		title: p.Title?.title?.[0]?.plain_text ?? 'Untitled',
+		title: titleProp?.title?.[0]?.plain_text ?? 'Untitled',
 		slug: p.Slug?.rich_text?.[0]?.plain_text ?? page.id,
 		description: p.Description?.rich_text?.[0]?.plain_text ?? '',
 		tags: (p.Tags?.multi_select ?? []).map((t: any) => t.name)
@@ -57,5 +59,5 @@ export async function getPost(slug: string) {
 	// ponytail: {@html} is safe here — content is your own trusted Notion, not user input.
 	const body_html = await marked(markdown);
 
-	return { ...toMeta(page), body_html, notionUrl: page.url };
+	return { ...toMeta(page), body_html };
 }

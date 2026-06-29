@@ -43,7 +43,7 @@
 		box-sizing: border-box;
 		text-align: center;
 		padding: 1em;
-		margin: 0 auto;
+		margin: 0 auto auto;
 		text-align: center;
 	}
 
