@@ -1,12 +1,6 @@
 <script>
 	export let data;
-	let devToArticles = data.devToArticles;
-
-	const blackListedArticles = [422939];
-
-	const articles = [...devToArticles];
-
-	const filteredArticles = articles.filter((article) => !blackListedArticles.includes(article?.id));
+	const articles = data.posts;
 </script>
 
 <svelte:head>
@@ -17,27 +11,24 @@
 	<div class="articles">
 		<h1>Articles</h1>
 
-		{#each filteredArticles as article}
+		{#each articles as article}
 			<div class="article">
 				<div class="header">
 					<h2>
 						{article.title}
 					</h2>
-					<div>Tags: {article.tags || article.category}</div>
+					<div>Tags: {article.tags.join(', ')}</div>
 				</div>
 				<p>
 					{article.description || ''}
 				</p>
 
-				<a
-					href={article.id ? `/blog/${article.id}` : article.link}
-					target={!article.id ? '_blank' : '_self'}
-				>
+				<a href={`/blog/${article.slug}`}>
 					<div class="button">Read Article =></div>
 				</a>
 			</div>
 		{/each}
-		{#if filteredArticles.length === 0}
+		{#if articles.length === 0}
 			<div>No Articles</div>
 		{/if}
 	</div>
@@ -52,7 +43,7 @@
 		box-sizing: border-box;
 		text-align: center;
 		padding: 1em;
-		margin: 0 auto;
+		margin: 0 auto auto;
 		text-align: center;
 	}
 
