@@ -9,65 +9,33 @@
 	<title>Daniel Booth — {article?.title || 'Missing article'}</title>
 </svelte:head>
 
-<div class="articleContainer">
-	<div class="article">
-		{#if article}
-			<h1 class="title">{article.title}</h1>
-			{@html article.body_html}
-		{/if}
+<div class="bezel">
+	<div class="powerled"></div>
+	<div class="screen">
+		<div class="menubar">
+			<span class="mbrand">BOOTH-OS</span>
+			<a class="backbtn" href="/blog">⟵ Back to Blog</a>
+			<a class="backbtn" href="/">Desktop</a>
+		</div>
+
+		<div class="page">
+			<div class="win win-doc">
+				<div class="titlebar">
+					<span class="ttext">{(article?.title || 'ARTICLE').toUpperCase()}.TXT</span>
+				</div>
+				<div class="winbody">
+					{#if article}
+						<h1>{article.title}</h1>
+						{@html article.body_html}
+					{:else}
+						<p class="muted">Article not found.</p>
+					{/if}
+				</div>
+			</div>
+		</div>
+
+		<div class="scan"></div>
+		<div class="glare"></div>
+		<div class="vig"></div>
 	</div>
 </div>
-
-<style>
-	.articleContainer {
-		width: 100%;
-		max-width: 350px;
-		display: flex;
-		justify-content: center;
-		box-sizing: border-box;
-		text-align: center;
-		padding: 0;
-		margin: 50px 10px auto;
-		text-align: center;
-		/* font-size: 20px; */
-	}
-
-	h1 {
-		font-weight: 700;
-		text-align: start;
-		margin: 0;
-		/* font-size: 36px; */
-	}
-	.title {
-		display: flex;
-	}
-
-	.article :global(img) {
-		max-width: 80%;
-	}
-
-	.article {
-		text-align: start;
-		box-sizing: border-box;
-		font-weight: 700;
-		display: flex;
-		flex-direction: column;
-		padding: 30px;
-		width: 100%;
-		border-radius: 5px;
-	}
-	.article:hover {
-		cursor: pointer;
-	}
-
-	@media (min-width: 900px) {
-		.articleContainer {
-			padding: 0;
-			max-width: 900px;
-		}
-		.article > h1 {
-			font-size: 48px;
-			margin: 50px 0 0 0;
-		}
-	}
-</style>
