@@ -16,11 +16,10 @@ const skills = {
 		'ArgoCD',
 		'Tekton',
 		'Helm',
-		'n8n',
 		'Serverless Functions'
 	],
 	Monitoring: ['Prometheus', 'Grafana', 'Loki', 'Mimir', 'Alloy', 'Jira Service Management'],
-	Programming: ['Python', 'Go', 'Bash', 'Svelte', 'TypeScript', 'Swift'],
+	Programming: ['Python', 'Go', 'Bash', 'TypeScript', 'Temporal', 'Durable Execution'],
 	Testing: [
 		'Unit & Integration Testing',
 		'Automated End-to-End Tests',
