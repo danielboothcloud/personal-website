@@ -182,6 +182,23 @@ body {
 	align-items: center;
 	gap: 12px;
 }
+/* email / github / linkedin icon links in the menubar */
+.mbicon {
+	display: inline-flex;
+	align-items: center;
+	color: inherit;
+	opacity: 0.82;
+	text-decoration: none;
+}
+.mbicon:hover {
+	opacity: 1;
+}
+.mbicon svg {
+	width: 17px;
+	height: 17px;
+	fill: currentColor;
+	display: block;
+}
 /* clear, button-like navigation control for the menubar on content routes */
 .backbtn {
 	display: inline-flex;
