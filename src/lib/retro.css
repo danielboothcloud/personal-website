@@ -1,0 +1,622 @@
+/* Retro CRT "BOOTH-OS" theme — shared across the desktop and content routes.
+   Every var() has a mono fallback, so pages without JS theming render mono. */
+
+html,
+body {
+	margin: 0;
+	height: 100%;
+	background: #3b3a32;
+	overflow: hidden;
+	font-family: 'VT323', monospace;
+	-webkit-font-smoothing: none;
+}
+#svelte {
+	max-width: none !important;
+	width: 100%;
+	height: 100%;
+	display: block;
+}
+* {
+	box-sizing: border-box;
+}
+::selection {
+	background: var(--ink, #15140f);
+	color: var(--win, #efedde);
+}
+
+@keyframes blink {
+	0%, 49% { opacity: 1; }
+	50%, 100% { opacity: 0; }
+}
+@keyframes flick {
+	0%, 100% { opacity: 0; }
+	3% { opacity: 0.18; }
+	6% { opacity: 0; }
+	73% { opacity: 0; }
+	76% { opacity: 0.12; }
+	79% { opacity: 0; }
+}
+@keyframes powon {
+	0% { transform: scaleY(0.004) scaleX(1); filter: brightness(4); }
+	22% { transform: scaleY(0.01) scaleX(1); filter: brightness(4); }
+	40% { transform: scaleY(1) scaleX(1); filter: brightness(2); }
+	100% { transform: scaleY(1); filter: brightness(1); }
+}
+@keyframes bootbar {
+	from { width: 0; }
+	to { width: 100%; }
+}
+@keyframes shake {
+	0%, 100% { transform: translate(0, 0); }
+	20% { transform: translate(-3px, 2px); }
+	40% { transform: translate(3px, -2px); }
+	60% { transform: translate(-2px, -2px); }
+	80% { transform: translate(2px, 2px); }
+}
+.screen.shake {
+	animation: shake 0.45s steps(2) 1;
+}
+
+/* --- MONITOR BEZEL --- */
+.bezel {
+	position: fixed;
+	inset: 0;
+	z-index: 9000;
+	display: flex;
+	padding: clamp(16px, 2.6vw, 42px) clamp(16px, 2.6vw, 42px) clamp(40px, 5vw, 72px);
+	background: radial-gradient(120% 120% at 30% 0%, #d8d0b4 0%, #c4bb9c 45%, #a59c7e 100%);
+	box-shadow: inset 0 0 0 2px #efe9d2, inset 0 0 90px rgba(70, 62, 40, 0.55);
+}
+.bezel::after {
+	content: 'danielbooth.cloud';
+	position: absolute;
+	left: 0;
+	right: 0;
+	bottom: clamp(12px, 2vw, 24px);
+	text-align: center;
+	font-family: 'Press Start 2P';
+	font-size: clamp(9px, 1.1vw, 13px);
+	letter-spacing: 0.06em;
+	color: #857b5b;
+	text-shadow: 0 1px 0 #e7e0c6;
+}
+.powerled {
+	position: absolute;
+	right: clamp(22px, 3vw, 40px);
+	bottom: clamp(14px, 2.1vw, 26px);
+	width: 9px;
+	height: 9px;
+	border-radius: 50%;
+	background: #5fe08a;
+	box-shadow: 0 0 9px #5fe08a, inset 0 0 3px #0a3a18;
+	z-index: 1;
+}
+
+/* --- SCREEN --- */
+.screen {
+	position: relative;
+	flex: 1;
+	border-radius: clamp(14px, 1.8vw, 26px);
+	overflow: hidden;
+	background: var(--bg, #dcd9c4);
+	box-shadow: inset 0 0 8px rgba(0, 0, 0, 0.5), inset 0 0 120px rgba(0, 0, 0, 0.28),
+		0 0 0 6px #2b2a23, 0 14px 30px rgba(0, 0, 0, 0.5);
+	transform-origin: center;
+	animation: powon 0.55s ease-out 1;
+}
+.vig {
+	position: absolute;
+	inset: 0;
+	pointer-events: none;
+	z-index: 60;
+	background: radial-gradient(120% 120% at 50% 50%, transparent 58%, rgba(0, 0, 0, 0.32) 100%);
+}
+.glare {
+	position: absolute;
+	inset: 0 0 50% 0;
+	pointer-events: none;
+	z-index: 61;
+	background: linear-gradient(180deg, rgba(255, 255, 255, 0.1), transparent);
+}
+.scan {
+	position: absolute;
+	inset: 0;
+	pointer-events: none;
+	z-index: 62;
+	background: repeating-linear-gradient(0deg, rgba(0, 0, 0, 0.1) 0 1px, transparent 1px 3px);
+}
+.flickl {
+	position: absolute;
+	inset: 0;
+	pointer-events: none;
+	z-index: 63;
+	background: #fff;
+	opacity: 0;
+	animation: flick 7s linear infinite;
+}
+
+/* --- DESKTOP --- */
+.desktop {
+	position: absolute;
+	inset: 0;
+	color: var(--ink, #15140f);
+	background: var(--bg, #dcd9c4);
+	background-image: radial-gradient(var(--dot, rgba(20, 19, 15, 0.16)) 1px, transparent 1px);
+	background-size: 7px 7px;
+	text-shadow: var(--glow, none);
+}
+.menubar {
+	position: absolute;
+	top: 0;
+	left: 0;
+	right: 0;
+	height: 30px;
+	z-index: 9000;
+	display: flex;
+	align-items: center;
+	gap: 18px;
+	padding: 0 12px;
+	background: var(--win, #efedde);
+	border-bottom: 2px solid var(--line, #15140f);
+	color: var(--ink, #15140f);
+}
+.mbrand {
+	font-family: 'Press Start 2P';
+	font-size: 9px;
+	letter-spacing: 0.02em;
+}
+.mitem {
+	font-size: 19px;
+	line-height: 1;
+	opacity: 0.82;
+	text-decoration: none;
+	color: inherit;
+}
+.mitem:hover {
+	opacity: 1;
+}
+.mclock {
+	margin-left: auto;
+	font-size: 19px;
+	display: flex;
+	align-items: center;
+	gap: 12px;
+}
+/* email / github / linkedin icon links in the menubar */
+.mbicon {
+	display: inline-flex;
+	align-items: center;
+	color: inherit;
+	opacity: 0.82;
+	text-decoration: none;
+}
+.mbicon:hover {
+	opacity: 1;
+}
+.mbicon svg {
+	width: 17px;
+	height: 17px;
+	fill: currentColor;
+	display: block;
+}
+/* clear, button-like navigation control for the menubar on content routes */
+.backbtn {
+	display: inline-flex;
+	align-items: center;
+	gap: 7px;
+	font-size: 18px;
+	line-height: 1;
+	padding: 3px 11px;
+	border: 2px solid var(--line, #15140f);
+	background: var(--bg, #dcd9c4);
+	color: inherit;
+	text-decoration: none;
+	box-shadow: 2px 2px 0 rgba(0, 0, 0, 0.25);
+}
+.backbtn:hover {
+	background: var(--ink, #15140f);
+	color: var(--win, #efedde);
+	box-shadow: none;
+	transform: translate(2px, 2px);
+}
+.statusbar {
+	position: absolute;
+	left: 0;
+	right: 0;
+	bottom: 0;
+	height: 26px;
+	z-index: 8999;
+	display: flex;
+	align-items: center;
+	gap: 14px;
+	padding: 0 12px;
+	background: var(--win, #efedde);
+	border-top: 2px solid var(--line, #15140f);
+	color: var(--ink, #15140f);
+	font-size: 18px;
+}
+
+/* icons — scale with viewport height so the column always fits */
+.icons {
+	position: absolute;
+	top: clamp(38px, 6vh, 44px);
+	right: 14px;
+	bottom: clamp(32px, 5vh, 40px);
+	z-index: 50;
+	display: flex;
+	flex-direction: column;
+	gap: clamp(4px, 1.6vh, 18px);
+	/* below the clamp floor the icons stay readable and the column scrolls instead of clipping */
+	overflow-y: auto;
+	scrollbar-width: none;
+}
+.icons::-webkit-scrollbar {
+	display: none;
+}
+.icon {
+	width: clamp(52px, 9vh, 74px);
+	flex: 0 0 auto;
+	cursor: pointer;
+	display: flex;
+	flex-direction: column;
+	align-items: center;
+	gap: clamp(3px, 0.9vh, 7px);
+	user-select: none;
+	text-decoration: none;
+	color: inherit;
+}
+.icon:hover .ibox {
+	transform: translate(-1px, -1px);
+}
+.ibox {
+	width: clamp(26px, 5.4vh, 42px);
+	height: clamp(32px, 6.4vh, 50px);
+	position: relative;
+	background: var(--win, #efedde);
+	border: 2px solid var(--ink, #15140f);
+	box-shadow: 3px 3px 0 rgba(0, 0, 0, 0.28);
+	transition: transform 0.12s;
+}
+.ibox::before {
+	content: '';
+	position: absolute;
+	top: 6px;
+	left: 6px;
+	right: 6px;
+	height: 3px;
+	background: var(--ink, #15140f);
+	box-shadow: 0 7px 0 var(--ink, #15140f), 0 14px 0 var(--ink, #15140f);
+	opacity: 0.55;
+}
+.ibox.fold::after {
+	content: '';
+	position: absolute;
+	top: -2px;
+	right: -2px;
+	width: 13px;
+	height: 13px;
+	background: var(--bg, #dcd9c4);
+	border-left: 2px solid var(--ink, #15140f);
+	border-bottom: 2px solid var(--ink, #15140f);
+}
+.ilabel {
+	font-size: clamp(11px, 1.7vh, 16px);
+	letter-spacing: 0.02em;
+	text-align: center;
+	background: var(--ink, #15140f);
+	color: var(--win, #efedde);
+	padding: 0 5px;
+}
+
+/* windows */
+.win {
+	position: absolute;
+	width: min(430px, 80vw);
+	background: var(--win, #efedde);
+	border: 2px solid var(--line, #15140f);
+	box-shadow: 5px 5px 0 rgba(0, 0, 0, 0.3);
+}
+.titlebar {
+	display: flex;
+	align-items: center;
+	gap: 8px;
+	height: 26px;
+	padding: 0 7px;
+	cursor: grab;
+	touch-action: none;
+	background: var(--bar, #15140f);
+	color: var(--baronk, #efedde);
+	border-bottom: 2px solid var(--line, #15140f);
+	background-image: repeating-linear-gradient(0deg, transparent 0 2px, rgba(255, 255, 255, 0.1) 2px 3px);
+}
+.titlebar:active {
+	cursor: grabbing;
+}
+.ttext {
+	flex: 1;
+	font-family: 'Press Start 2P';
+	font-size: 8px;
+	letter-spacing: 0.02em;
+	white-space: nowrap;
+	overflow: hidden;
+	text-overflow: ellipsis;
+}
+.xbtn {
+	margin-left: auto;
+	width: 17px;
+	height: 17px;
+	flex: none;
+	display: flex;
+	align-items: center;
+	justify-content: center;
+	font-family: 'Press Start 2P';
+	font-size: 8px;
+	line-height: 1;
+	cursor: pointer;
+	background: var(--win, #efedde);
+	color: var(--bar, #15140f);
+	border: 2px solid var(--baronk, #efedde);
+	text-decoration: none;
+}
+.xbtn:hover {
+	background: #d23b2e;
+	color: #fff;
+	border-color: #d23b2e;
+}
+.winbody {
+	padding: 14px 15px 16px;
+	font-size: 21px;
+	line-height: 1.16;
+	color: var(--ink, #15140f);
+	max-height: 62vh;
+	overflow: auto;
+	overflow-wrap: break-word;
+}
+.hl {
+	background: var(--ink, #15140f);
+	color: var(--win, #efedde);
+	padding: 0 4px;
+}
+.row {
+	display: flex;
+	justify-content: space-between;
+	gap: 10px;
+	align-items: baseline;
+	border-bottom: 1px dashed var(--line, #15140f);
+	padding-bottom: 3px;
+	margin-bottom: 5px;
+}
+.muted {
+	color: var(--dim, #6c6a5b);
+}
+.chipgrid {
+	display: flex;
+	flex-wrap: wrap;
+	gap: 7px;
+}
+.chip {
+	border: 2px solid var(--line, #15140f);
+	padding: 1px 8px;
+	font-size: 18px;
+	background: var(--bg, #dcd9c4);
+}
+.btn {
+	display: flex;
+	align-items: center;
+	gap: 9px;
+	border: 2px solid var(--line, #15140f);
+	background: var(--bg, #dcd9c4);
+	color: var(--ink, #15140f);
+	padding: 7px 11px;
+	font-family: 'VT323';
+	font-size: 20px;
+	cursor: pointer;
+	text-decoration: none;
+	box-shadow: 3px 3px 0 rgba(0, 0, 0, 0.25);
+}
+.btn:hover {
+	background: var(--ink, #15140f);
+	color: var(--win, #efedde);
+	box-shadow: none;
+	transform: translate(2px, 2px);
+}
+
+/* skill / project blocks inside windows */
+.cat {
+	margin: 0 0 11px;
+}
+.cat-h {
+	font-family: 'Press Start 2P';
+	font-size: 9px;
+	letter-spacing: 0.02em;
+	margin: 0 0 6px;
+	display: block;
+}
+.item {
+	margin: 0 0 13px;
+}
+.item-h {
+	display: flex;
+	justify-content: space-between;
+	gap: 10px;
+	align-items: baseline;
+	border-bottom: 1px dashed var(--line, #15140f);
+	padding-bottom: 3px;
+	margin-bottom: 5px;
+}
+.item-t {
+	font-weight: 700;
+}
+
+/* boot screen */
+.boot {
+	position: absolute;
+	inset: 0;
+	z-index: 7000;
+	display: flex;
+	flex-direction: column;
+	align-items: center;
+	justify-content: center;
+	text-align: center;
+	background: var(--bg, #dcd9c4);
+	color: var(--ink, #15140f);
+	text-shadow: var(--glow, none);
+	padding: 24px;
+	background-image: radial-gradient(var(--dot, rgba(20, 19, 15, 0.16)) 1px, transparent 1px);
+	background-size: 7px 7px;
+}
+.bootlogo {
+	font-family: 'Press Start 2P';
+	font-size: clamp(34px, 9vw, 104px);
+	line-height: 1.06;
+	letter-spacing: 0.02em;
+	text-shadow: 4px 4px 0 var(--dim, #a39a7c);
+}
+.boottag {
+	font-family: 'Press Start 2P';
+	font-size: clamp(8px, 1.3vw, 13px);
+	letter-spacing: 0.34em;
+	margin-top: 22px;
+	color: var(--dim, #6c6a5b);
+}
+.start {
+	font-family: 'Press Start 2P';
+	font-size: clamp(12px, 2vw, 22px);
+	letter-spacing: 0.08em;
+	margin-top: clamp(40px, 7vh, 72px);
+	cursor: pointer;
+	background: none;
+	border: none;
+	color: inherit;
+	text-shadow: var(--glow, none);
+}
+.startwrap {
+	display: flex;
+	align-items: center;
+	gap: 14px;
+}
+.copy {
+	font-family: 'Press Start 2P';
+	font-size: clamp(7px, 1vw, 10px);
+	letter-spacing: 0.12em;
+	margin-top: clamp(28px, 5vh, 52px);
+	color: var(--dim, #6c6a5b);
+}
+.boottrack {
+	width: min(280px, 60vw);
+	height: 10px;
+	border: 2px solid var(--line, #15140f);
+	margin-top: 20px;
+	padding: 1px;
+}
+.bootfill {
+	height: 100%;
+	background: var(--ink, #15140f);
+	animation: bootbar 2.4s steps(24) infinite;
+}
+
+/* --- CONTENT ROUTES (blog list, posts) --- */
+/* scroll area below the menubar that centres a single document window */
+.page {
+	position: absolute;
+	top: 30px;
+	left: 0;
+	right: 0;
+	bottom: 26px;
+	z-index: 40;
+	overflow: auto;
+	padding: 26px 16px 40px;
+	color: var(--ink, #15140f);
+	background: var(--bg, #dcd9c4);
+	background-image: radial-gradient(var(--dot, rgba(20, 19, 15, 0.16)) 1px, transparent 1px);
+	background-size: 7px 7px;
+}
+.win-doc {
+	position: static;
+	width: min(760px, 94%);
+	margin: 0 auto;
+}
+.win-doc + .win-doc {
+	margin-top: 26px;
+}
+/* document windows grow with content; the .page scrolls, not the body */
+.win-doc .winbody {
+	max-height: none;
+}
+
+/* rich text rendered from Notion ({@html}) inside a window body */
+.winbody :where(h1, h2, h3) {
+	font-family: 'Press Start 2P';
+	line-height: 1.4;
+	margin: 22px 0 12px;
+}
+.winbody :where(h1) { font-size: 15px; }
+.winbody :where(h2) { font-size: 12px; }
+.winbody :where(h3) { font-size: 10px; }
+.winbody :where(p, ul, ol) { margin: 0 0 12px; }
+.winbody :where(ul, ol) { padding-left: 22px; }
+.winbody :where(a) {
+	color: var(--ink, #15140f);
+	text-decoration: underline;
+	text-underline-offset: 2px;
+}
+.winbody :where(a):hover {
+	background: var(--ink, #15140f);
+	color: var(--win, #efedde);
+}
+.winbody :where(img) {
+	max-width: 100%;
+	border: 2px solid var(--line, #15140f);
+}
+.winbody :where(code) {
+	background: var(--bg, #dcd9c4);
+	border: 2px solid var(--line, #15140f);
+	padding: 0 5px;
+	font-size: 17px;
+}
+.winbody :where(pre) {
+	background: var(--bg, #dcd9c4);
+	border: 2px solid var(--line, #15140f);
+	padding: 10px 12px;
+	overflow: auto;
+}
+.winbody :where(pre code) {
+	border: 0;
+	padding: 0;
+}
+.winbody :where(blockquote) {
+	border-left: 4px solid var(--line, #15140f);
+	margin: 0 0 12px;
+	padding-left: 12px;
+	color: var(--dim, #6c6a5b);
+}
+
+/* --- narrow screens: keep the menu/status bars from overflowing --- */
+@media (max-width: 560px) {
+	.menubar {
+		gap: 11px;
+		padding: 0 8px;
+	}
+	.mitem {
+		font-size: 16px;
+	}
+	.mclock {
+		gap: 8px;
+		font-size: 16px;
+	}
+	.backbtn {
+		font-size: 15px;
+		padding: 3px 8px;
+	}
+	.statusbar {
+		gap: 9px;
+		padding: 0 8px;
+		font-size: 15px;
+	}
+	.winbody {
+		font-size: 19px;
+	}
+	.page {
+		padding: 16px 10px 32px;
+	}
+}
