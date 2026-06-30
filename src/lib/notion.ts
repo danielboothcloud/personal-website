@@ -44,6 +44,23 @@ export async function listPosts() {
 	return res.results.map(toMeta);
 }
 
+// A Notion list item written with line breaks (Shift+Enter) becomes one block whose
+// text holds multiple paragraphs separated by \n\n. Markdown only keeps those inside
+// the item if continuation lines are indented; otherwise the later paragraphs break
+// out flush-left. Indent each list item's own continuation lines to keep them in.
+function indentListContinuations(blocks: any[]) {
+	for (const b of blocks) {
+		if (
+			(b.type === 'bulleted_list_item' || b.type === 'numbered_list_item') &&
+			b.parent?.includes('\n')
+		) {
+			const [first, ...rest] = b.parent.split('\n');
+			b.parent = [first, ...rest.map((l: string) => (l === '' ? '' : '  ' + l))].join('\n');
+		}
+		if (b.children?.length) indentListContinuations(b.children);
+	}
+}
+
 export async function getPost(slug: string) {
 	const data_source_id = await getDataSourceId();
 	const res = await notion.dataSources.query({
@@ -55,6 +72,7 @@ export async function getPost(slug: string) {
 	if (!page) return null;
 
 	const mdBlocks = await n2m.pageToMarkdown(page.id);
+	indentListContinuations(mdBlocks);
 	const markdown = n2m.toMarkdownString(mdBlocks).parent ?? '';
 	// ponytail: {@html} is safe here — content is your own trusted Notion, not user input.
 	const body_html = await marked(markdown);
