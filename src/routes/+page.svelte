@@ -263,7 +263,7 @@
 								Technology is just a tool; I'm all about the right approach for the business need.
 							</p>
 							<p style="margin:0;" class="muted">
-								Off the clock: trail bike, hills, and a home lab built for breaking things on purpose.
+								Off the clock: trail bike, hikes, and a home lab built for breaking things on purpose.
 							</p>
 						</div>
 					</div>
