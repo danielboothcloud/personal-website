@@ -14,13 +14,13 @@ const projects = [
 	},
 	{
 		title: 'Personal Website',
-		technologies: ['SvelteKit', 'TypeScript', 'Tailwind', 'Cloudflare'],
+		technologies: ['SvelteKit', 'TypeScript', 'Tailwind'],
 		description: 'Portfolio website showcasing my work and skills',
 		url: 'https://github.com/danielboothcloud/personal-website'
 	},
 	{
 		title: 'Learning Roadmap',
-		technologies: ['Svelte', 'Cloudflare'],
+		technologies: ['Svelte'],
 		description: 'Personal learning roadmap for tracking progress of my professional development',
 		url: 'https://github.com/danielbooth-cloud/roadmap'
 	},

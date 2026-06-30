@@ -2,7 +2,7 @@ const skills = {
 	'Cloud & Containers': [
 		'AWS',
 		'Azure',
-		'GCP',
+		'Cloudflare',
 		'Kubernetes',
 		'OpenShift',
 		'Docker Swarm',
