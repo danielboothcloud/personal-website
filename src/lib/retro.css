@@ -219,23 +219,31 @@ body {
 	font-size: 18px;
 }
 
-/* icons */
+/* icons — scale with viewport height so the column always fits */
 .icons {
 	position: absolute;
-	top: 44px;
+	top: clamp(38px, 6vh, 44px);
 	right: 14px;
+	bottom: clamp(32px, 5vh, 40px);
 	z-index: 50;
 	display: flex;
 	flex-direction: column;
-	gap: 18px;
+	gap: clamp(4px, 1.6vh, 18px);
+	/* below the clamp floor the icons stay readable and the column scrolls instead of clipping */
+	overflow-y: auto;
+	scrollbar-width: none;
+}
+.icons::-webkit-scrollbar {
+	display: none;
 }
 .icon {
-	width: 74px;
+	width: clamp(52px, 9vh, 74px);
+	flex: 0 0 auto;
 	cursor: pointer;
 	display: flex;
 	flex-direction: column;
 	align-items: center;
-	gap: 7px;
+	gap: clamp(3px, 0.9vh, 7px);
 	user-select: none;
 	text-decoration: none;
 	color: inherit;
@@ -244,8 +252,8 @@ body {
 	transform: translate(-1px, -1px);
 }
 .ibox {
-	width: 42px;
-	height: 50px;
+	width: clamp(26px, 5.4vh, 42px);
+	height: clamp(32px, 6.4vh, 50px);
 	position: relative;
 	background: var(--win, #efedde);
 	border: 2px solid var(--ink, #15140f);
@@ -275,7 +283,7 @@ body {
 	border-bottom: 2px solid var(--ink, #15140f);
 }
 .ilabel {
-	font-size: 16px;
+	font-size: clamp(11px, 1.7vh, 16px);
 	letter-spacing: 0.02em;
 	text-align: center;
 	background: var(--ink, #15140f);
