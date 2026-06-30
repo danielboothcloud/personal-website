@@ -53,10 +53,25 @@
 		glitch = true;
 		setTimeout(() => (glitch = false), 450);
 	};
-	// File → cascade every app window open
+	// File → open every app window, scattered so they don't clump on top of each other
 	const openAll = () => {
-		(['readme', 'skills', 'projects', 'resume', 'connect'] as WinKey[]).forEach((k) => {
+		const scr = document.querySelector('.screen');
+		const W = scr ? scr.getBoundingClientRect().width : 1100;
+		const H = scr ? scr.getBoundingClientRect().height : 700;
+		// relative anchors (fractions of the screen) spread across the desktop
+		const layout: Record<string, [number, number]> = {
+			readme: [0.02, 0.1],
+			skills: [0.58, 0.08],
+			projects: [0.04, 0.5],
+			resume: [0.36, 0.34],
+			connect: [0.62, 0.55]
+		};
+		(Object.keys(layout) as WinKey[]).forEach((k) => {
+			const x = Math.max(2, Math.min(layout[k][0] * W, W - 150));
+			const y = Math.max(34, Math.min(layout[k][1] * H, H - 70));
 			win[k].open = true;
+			win[k].x = x;
+			win[k].y = y;
 			win[k].z = ++topZ;
 		});
 		win = win;
@@ -347,7 +362,7 @@
 						</div>
 						<div class="winbody">
 							<p style="margin:0 0 10px;" class="muted">10 PRINT "HELLO, EXPLORER"<br />20 GOTO 10</p>
-							<p style="margin:0 0 10px;">A wild <span class="hl">DANIEL</span> appears! He offers you ☕ and a freshly-provisioned k8s cluster.</p>
+							<p style="margin:0 0 10px;">A wild <span class="hl">CONTAINER</span> appears! You try to <code>kubectl delete</code> it — but it respawns. Classic ReplicaSet.</p>
 							<p style="margin:0 0 12px;">★ ACHIEVEMENT UNLOCKED: <span class="hl">CURIOUS CURSOR</span></p>
 							<p style="margin:0;" class="muted">Hint: the old gamers' dance still works —<br />↑ ↑ ↓ ↓ ← → ← → B A</p>
 						</div>
