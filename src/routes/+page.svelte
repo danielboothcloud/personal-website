@@ -36,13 +36,47 @@
 	let now = '';
 	let topZ = 6;
 
-	type WinKey = 'readme' | 'skills' | 'projects' | 'resume' | 'connect';
+	type WinKey = 'readme' | 'skills' | 'projects' | 'resume' | 'connect' | 'secret';
 	let win: Record<WinKey, { open: boolean; x: number; y: number; z: number }> = {
 		readme: { open: true, x: 56, y: 56, z: 6 },
 		skills: { open: true, x: 470, y: 110, z: 4 },
 		projects: { open: false, x: 120, y: 130, z: 3 },
 		resume: { open: false, x: 330, y: 110, z: 2 },
-		connect: { open: false, x: 540, y: 250, z: 1 }
+		connect: { open: false, x: 540, y: 250, z: 1 },
+		secret: { open: false, x: 280, y: 200, z: 1 }
+	};
+
+	// --- menubar easter eggs ---
+	let glitch = false;
+	let godmode = false;
+	const flashGlitch = () => {
+		glitch = true;
+		setTimeout(() => (glitch = false), 450);
+	};
+	// File → cascade every app window open
+	const openAll = () => {
+		(['readme', 'skills', 'projects', 'resume', 'connect'] as WinKey[]).forEach((k) => {
+			win[k].open = true;
+			win[k].z = ++topZ;
+		});
+		win = win;
+	};
+	// Special → reveal the secret disk + a quick CRT glitch
+	const special = () => {
+		open('secret');
+		flashGlitch();
+	};
+
+	// Konami code → GOD MODE: green phosphor + a glitch
+	const KONAMI = ['ArrowUp','ArrowUp','ArrowDown','ArrowDown','ArrowLeft','ArrowRight','ArrowLeft','ArrowRight','b','a'];
+	let kseq: string[] = [];
+	const onKey = (e: KeyboardEvent) => {
+		kseq = [...kseq, e.key.length === 1 ? e.key.toLowerCase() : e.key].slice(-KONAMI.length);
+		if (kseq.join(',') === KONAMI.join(',')) {
+			godmode = true;
+			phosphor = 'green';
+			flashGlitch();
+		}
 	};
 
 	const clock = () => {
@@ -122,11 +156,13 @@
 		now = clock();
 		tick = setInterval(() => (now = clock()), 1000);
 		if (!booted) window.addEventListener('keydown', boot);
+		window.addEventListener('keydown', onKey);
 	});
 	onDestroy(() => {
 		if (typeof window === 'undefined') return;
 		clearInterval(tick);
 		window.removeEventListener('keydown', boot);
+		window.removeEventListener('keydown', onKey);
 		window.removeEventListener('pointermove', move);
 		window.removeEventListener('pointerup', up);
 	});
@@ -142,7 +178,7 @@
 
 <div class="bezel">
 	<div class="powerled"></div>
-	<div class="screen" style={screenStyle}>
+	<div class="screen" class:shake={glitch} style={screenStyle}>
 		<!-- BOOT / TITLE SCREEN -->
 		{#if !booted}
 			<div class="boot">
@@ -164,16 +200,9 @@
 				<!-- menu bar -->
 				<div class="menubar">
 					<span class="mbrand">BOOTH-OS</span>
-					<span class="mitem">File</span>
-					<span
-						class="mitem"
-						role="button"
-						tabindex="0"
-						style="cursor:pointer"
-						on:click={cyclePhosphor}
-						on:keypress={cyclePhosphor}>View</span
-					>
-					<span class="mitem">Special</span>
+					<span class="mitem" role="button" tabindex="0" style="cursor:pointer" on:click={openAll} on:keypress={openAll}>File</span>
+					<span class="mitem" role="button" tabindex="0" style="cursor:pointer" on:click={cyclePhosphor} on:keypress={cyclePhosphor}>View</span>
+					<span class="mitem" role="button" tabindex="0" style="cursor:pointer" on:click={special} on:keypress={special}>Special</span>
 					<span class="mclock"><span>▰▰▰</span><span>{now}</span></span>
 				</div>
 
@@ -309,10 +338,26 @@
 					</div>
 				{/if}
 
+				<!-- SECRET (Special menu / easter egg) -->
+				{#if win.secret.open}
+					<div class="win" style="left:{win.secret.x}px; top:{win.secret.y}px; z-index:{win.secret.z}" on:pointerdown={() => focus('secret')}>
+						<div class="titlebar" on:pointerdown={(e) => startDrag(e, 'secret')}>
+							<span class="ttext">SECRET.BAS</span>
+							<span class="xbtn" role="button" tabindex="0" on:click={() => close('secret')} on:keypress={() => close('secret')} on:pointerdown|stopPropagation>×</span>
+						</div>
+						<div class="winbody">
+							<p style="margin:0 0 10px;" class="muted">10 PRINT "HELLO, EXPLORER"<br />20 GOTO 10</p>
+							<p style="margin:0 0 10px;">A wild <span class="hl">DANIEL</span> appears! He offers you ☕ and a freshly-provisioned k8s cluster.</p>
+							<p style="margin:0 0 12px;">★ ACHIEVEMENT UNLOCKED: <span class="hl">CURIOUS CURSOR</span></p>
+							<p style="margin:0;" class="muted">Hint: the old gamers' dance still works —<br />↑ ↑ ↓ ↓ ← → ← → B A</p>
+						</div>
+					</div>
+				{/if}
+
 				<!-- status bar -->
 				<div class="statusbar">
 					<span>{openCount} OPEN</span><span class="muted">|</span><span>danielbooth.cloud</span>
-					<span class="mclock" style="margin-left:auto;">▮▮▮ MEM OK</span>
+					<span class="mclock" style="margin-left:auto;">▮▮▮ {godmode ? '★ GOD MODE' : 'MEM OK'}</span>
 				</div>
 			</div>
 		{/if}
