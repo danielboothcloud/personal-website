@@ -353,6 +353,7 @@ body {
 	color: var(--ink, #15140f);
 	max-height: 62vh;
 	overflow: auto;
+	overflow-wrap: break-word;
 }
 .hl {
 	background: var(--ink, #15140f);
@@ -571,4 +572,34 @@ body {
 	margin: 0 0 12px;
 	padding-left: 12px;
 	color: var(--dim, #6c6a5b);
+}
+
+/* --- narrow screens: keep the menu/status bars from overflowing --- */
+@media (max-width: 560px) {
+	.menubar {
+		gap: 11px;
+		padding: 0 8px;
+	}
+	.mitem {
+		font-size: 16px;
+	}
+	.mclock {
+		gap: 8px;
+		font-size: 16px;
+	}
+	.backbtn {
+		font-size: 15px;
+		padding: 3px 8px;
+	}
+	.statusbar {
+		gap: 9px;
+		padding: 0 8px;
+		font-size: 15px;
+	}
+	.winbody {
+		font-size: 19px;
+	}
+	.page {
+		padding: 16px 10px 32px;
+	}
 }

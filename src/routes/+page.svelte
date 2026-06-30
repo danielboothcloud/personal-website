@@ -113,7 +113,23 @@
 		win[k].z = ++topZ;
 		win = win;
 	};
+	// keep a window's position inside the visible screen (so it can't open/strand off-screen)
+	const clampInto = (k: WinKey) => {
+		const scr = document.querySelector('.screen');
+		if (!scr) return;
+		const r = scr.getBoundingClientRect();
+		win[k].x = Math.max(2, Math.min(win[k].x, r.width - 100));
+		win[k].y = Math.max(34, Math.min(win[k].y, r.height - 60));
+	};
+	const clampAll = () => {
+		(Object.keys(win) as WinKey[]).forEach((k) => {
+			if (win[k].open) clampInto(k);
+		});
+		win = win;
+	};
+
 	const open = (k: WinKey) => {
+		clampInto(k);
 		win[k].open = true;
 		win[k].z = ++topZ;
 		win = win;
@@ -172,12 +188,15 @@
 		tick = setInterval(() => (now = clock()), 1000);
 		if (!booted) window.addEventListener('keydown', boot);
 		window.addEventListener('keydown', onKey);
+		window.addEventListener('resize', clampAll);
+		clampAll(); // pull the auto-opened windows in to fit the current screen
 	});
 	onDestroy(() => {
 		if (typeof window === 'undefined') return;
 		clearInterval(tick);
 		window.removeEventListener('keydown', boot);
 		window.removeEventListener('keydown', onKey);
+		window.removeEventListener('resize', clampAll);
 		window.removeEventListener('pointermove', move);
 		window.removeEventListener('pointerup', up);
 	});
