@@ -254,22 +254,34 @@
 				<!-- desktop icons -->
 				<div class="icons">
 					<div class="icon" role="button" tabindex="0" on:click={() => open('readme')} on:keypress={() => open('readme')}>
-						<div class="ibox fold"></div><div class="ilabel">README</div>
+						<div class="ibox">
+							<svg viewBox="0 0 24 24"><path d="M5 2h9l5 5v15H5V2zm8 1.9V8h4.1L13 3.9zM7.5 11h9v1.6h-9V11zm0 3.5h9v1.6h-9v-1.6zm0 3.5h6v1.6h-6V18z" /></svg>
+						</div><div class="ilabel">README</div>
 					</div>
 					<div class="icon" role="button" tabindex="0" on:click={() => open('skills')} on:keypress={() => open('skills')}>
-						<div class="ibox fold"></div><div class="ilabel">SKILLS</div>
+						<div class="ibox">
+							<svg viewBox="0 0 24 24"><path fill-rule="evenodd" d="M19.14 12.94c.04-.31.06-.63.06-.94s-.02-.63-.06-.94l2.03-1.58a.5.5 0 0 0 .12-.64l-1.92-3.32a.5.5 0 0 0-.6-.22l-2.39.96a7 7 0 0 0-1.62-.94l-.36-2.54a.5.5 0 0 0-.5-.42h-3.84a.5.5 0 0 0-.5.42l-.36 2.54c-.59.24-1.13.56-1.62.94l-2.39-.96a.5.5 0 0 0-.6.22L2.74 8.84a.5.5 0 0 0 .12.64l2.03 1.58c-.04.31-.06.63-.06.94s.02.63.06.94l-2.03 1.58a.5.5 0 0 0-.12.64l1.92 3.32a.5.5 0 0 0 .6.22l2.39-.96c.49.38 1.03.7 1.62.94l.36 2.54a.5.5 0 0 0 .5.42h3.84a.5.5 0 0 0 .5-.42l.36-2.54c.59-.24 1.13-.56 1.62-.94l2.39.96a.5.5 0 0 0 .6-.22l1.92-3.32a.5.5 0 0 0-.12-.64l-2.03-1.58zM12 15.6A3.6 3.6 0 1 1 12 8.4a3.6 3.6 0 0 1 0 7.2z" /></svg>
+						</div><div class="ilabel">SKILLS</div>
 					</div>
 					<div class="icon" role="button" tabindex="0" on:click={() => open('projects')} on:keypress={() => open('projects')}>
-						<div class="ibox fold"></div><div class="ilabel">PROJECTS</div>
+						<div class="ibox">
+							<svg viewBox="0 0 24 24"><path d="M3 4h6l2 2h10v14H3V4z" /></svg>
+						</div><div class="ilabel">PROJECTS</div>
 					</div>
 					<a class="icon" href="/blog">
-						<div class="ibox fold"></div><div class="ilabel">BLOG</div>
+						<div class="ibox">
+							<svg viewBox="0 0 24 24"><path d="M3 17.25V21h3.75L17.8 9.94l-3.75-3.75L3 17.25zM20.7 7.04a1 1 0 0 0 0-1.41l-2.34-2.34a1 1 0 0 0-1.41 0l-1.83 1.83 3.75 3.75 1.83-1.83z" /></svg>
+						</div><div class="ilabel">BLOG</div>
 					</a>
 					<div class="icon" role="button" tabindex="0" on:click={() => open('resume')} on:keypress={() => open('resume')}>
-						<div class="ibox fold"></div><div class="ilabel">RESUME</div>
+						<div class="ibox">
+							<svg viewBox="0 0 24 24"><path fill-rule="evenodd" d="M6 2h8l4 4v16H6V2zm7.4 1.8V7.2H17L13.4 3.8zM8.5 12h7v1.5h-7V12zm0 3.4h7V17h-7v-1.6z" /></svg>
+						</div><div class="ilabel">RESUME</div>
 					</div>
 					<div class="icon" role="button" tabindex="0" on:click={() => open('connect')} on:keypress={() => open('connect')}>
-						<div class="ibox fold"></div><div class="ilabel">CONNECT</div>
+						<div class="ibox">
+							<svg viewBox="0 0 24 24"><path d="M3 4h18v12H8l-5 5V4z" /></svg>
+						</div><div class="ilabel">CONNECT</div>
 					</div>
 				</div>
 

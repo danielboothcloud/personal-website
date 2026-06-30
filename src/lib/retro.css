@@ -272,32 +272,20 @@ body {
 	width: clamp(26px, 5.4vh, 42px);
 	height: clamp(32px, 6.4vh, 50px);
 	position: relative;
+	display: flex;
+	align-items: center;
+	justify-content: center;
 	background: var(--win, #efedde);
 	border: 2px solid var(--ink, #15140f);
 	box-shadow: 3px 3px 0 rgba(0, 0, 0, 0.28);
+	color: var(--ink, #15140f);
 	transition: transform 0.12s;
 }
-.ibox::before {
-	content: '';
-	position: absolute;
-	top: 6px;
-	left: 6px;
-	right: 6px;
-	height: 3px;
-	background: var(--ink, #15140f);
-	box-shadow: 0 7px 0 var(--ink, #15140f), 0 14px 0 var(--ink, #15140f);
-	opacity: 0.55;
-}
-.ibox.fold::after {
-	content: '';
-	position: absolute;
-	top: -2px;
-	right: -2px;
-	width: 13px;
-	height: 13px;
-	background: var(--bg, #dcd9c4);
-	border-left: 2px solid var(--ink, #15140f);
-	border-bottom: 2px solid var(--ink, #15140f);
+.ibox svg {
+	width: 60%;
+	height: 60%;
+	fill: currentColor;
+	display: block;
 }
 .ilabel {
 	font-size: clamp(11px, 1.7vh, 16px);
