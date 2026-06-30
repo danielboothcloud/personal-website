@@ -7,8 +7,7 @@ import { env } from '$env/dynamic/private';
 const notion = new Client({ auth: env.NOTION_TOKEN });
 const n2m = new NotionToMarkdown({ notionClient: notion });
 
-// ponytail: v5 dropped databases.query — resolve the database's first data source
-// once and cache it. Single data source is the norm; revisit only for multi-source DBs.
+// v5 dropped databases.query — resolve the database's first data source once and cache it.
 let dataSourceId: string | undefined;
 async function getDataSourceId(): Promise<string> {
 	if (!dataSourceId) {
@@ -74,8 +73,9 @@ export async function getPost(slug: string) {
 	const mdBlocks = await n2m.pageToMarkdown(page.id);
 	indentListContinuations(mdBlocks);
 	const markdown = n2m.toMarkdownString(mdBlocks).parent ?? '';
-	// ponytail: {@html} is safe here — content is your own trusted Notion, not user input.
-	const body_html = await marked(markdown);
+	// breaks: honour Notion's Shift+Enter line breaks (single \n) instead of collapsing them.
+	// {@html} is safe here — content is trusted Notion, not user input.
+	const body_html = await marked(markdown, { breaks: true });
 
 	return { ...toMeta(page), body_html };
 }

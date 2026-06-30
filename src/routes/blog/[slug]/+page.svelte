@@ -23,7 +23,7 @@
 				<div class="titlebar">
 					<span class="ttext">{(article?.title || 'ARTICLE').toUpperCase()}.TXT</span>
 				</div>
-				<div class="winbody">
+				<div class="winbody prose">
 					{#if article}
 						<h1>{article.title}</h1>
 						{@html article.body_html}

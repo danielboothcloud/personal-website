@@ -521,7 +521,7 @@ body {
 }
 .win-doc {
 	position: static;
-	width: min(760px, 94%);
+	width: min(960px, 94%);
 	margin: 0 auto;
 }
 .win-doc + .win-doc {
@@ -530,6 +530,24 @@ body {
 /* document windows grow with content; the .page scrolls, not the body */
 .win-doc .winbody {
 	max-height: none;
+}
+
+/* blog documents: classical manuscript / Hellenistic vibe (body prose only) */
+.prose {
+	font-family: 'Cormorant Garamond', Georgia, serif;
+	font-size: 26px;
+	line-height: 1.3;
+}
+.winbody.prose :where(h1, h2, h3) {
+	font-family: 'Cinzel', serif;
+	letter-spacing: 0.04em;
+	line-height: 1.25;
+}
+.winbody.prose :where(h1) { font-size: 34px; }
+.winbody.prose :where(h2) { font-size: 27px; }
+.winbody.prose :where(h3) { font-size: 22px; }
+.prose :where(code, pre, pre code) {
+	font-family: 'VT323', monospace;
 }
 
 /* rich text rendered from Notion ({@html}) inside a window body */
